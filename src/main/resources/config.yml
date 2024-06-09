@@ -1,3 +1,29 @@
-# If it's false it show a normal message.
-# But if it's True it shows the player head in chat.
-player_head_join_message: true
+updateChecker: false
+
+join_message:
+  # Set the default message without player head.
+  default_message: "&fWelcome &c%player_name% &fto the server!"
+
+  # useMargin is a style for the message making a margin top & bottom of the message.
+  use_margin: true
+
+  # If it's false it show a normal message.
+  # But if it's True it shows the player head in chat.
+  player_head_join_message: true
+
+  # The message support PlaceholderAPI & Minecraft chat colors.
+  message_content:
+    - ""
+    - "&fWelcome &c%player_name% &fto the server!"
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+    - ""
+
+# All the messages support chat color by &
+translation:
+  err_permission: "&fYou don't have enough permissions."
+  reload_command: "&fThe plugin was reloaded."
+  loading_config: "&fLoading configuration..."

@@ -5,3 +5,18 @@ api-version: '1.20'
 load: STARTUP
 authors: [danilppzz]
 description: This is a plugin that add a join message & events
+softdepend: [PlaceholderAPI]
+
+commands:
+  superjoin:
+    permission: superjoin.reload
+    description: Main command of SuperJoin.
+
+permissions:
+  superjoin.*:
+    description: All permissions of SuperJoin
+    children:
+      - superjoin.reload
+
+  superjoin.reload:
+    description: Reload the plugin configuration.
