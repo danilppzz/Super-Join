@@ -1,4 +1,4 @@
-package dev.danilppzz.superjoin.api.player;
+package dev.danilppzz.superjoin.common.player;
 
 import java.awt.image.BufferedImage;
 import java.util.UUID;

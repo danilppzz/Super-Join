@@ -1,6 +1,7 @@
-package dev.danilppzz.superjoin.api.player;
+package dev.danilppzz.superjoin.common.player;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -15,7 +16,6 @@ import java.util.UUID;
 
 public class PlayerHead {
 
-
     private static BufferedImage apply(UUID uuid, BufferedImage in) {
         BufferedImage head;
 
@@ -23,11 +23,11 @@ public class PlayerHead {
         BufferedImage layer2 = in.getSubimage(40, 8, 8, 8);
 
         try {
-            head = new BufferedImage(48,  48, BufferedImage.TYPE_INT_ARGB);
+            head = new BufferedImage(8,  8, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = head.createGraphics();
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-            g.drawImage(layer1, 4, 4, 40, 40, null);
-            g.drawImage(layer2, 0, 0, 48, 48, null);
+            g.drawImage(layer1, 0, 0, 8, 8, null);
+            g.drawImage(layer2, 0, 0, 8, 8, null);
         } catch (Throwable t) { // There might be problems with headless servers when loading the graphics class, so we catch every exception and error on purpose here
             head = new BufferedImage(8, 8, in.getType());
             layer1.copyData(head.getRaster());
@@ -52,64 +52,20 @@ public class PlayerHead {
             reader.close();
 
             Gson gson = new Gson();
-            ProfileResponse profileResponse = gson.fromJson(response.toString(), ProfileResponse.class);
-
-            String base64Textures = profileResponse.getProperties()[0].getValue();
+            // Parsear directamente el JSON sin necesidad de las clases eliminadas
+            String base64Textures = gson.fromJson(response.toString(), JsonObject.class)
+                    .getAsJsonArray("properties").get(0)
+                    .getAsJsonObject().get("value").getAsString();
             String jsonTextures = new String(Base64.getDecoder().decode(base64Textures));
 
-            Textures textures = gson.fromJson(jsonTextures, Textures.class);
-            String skinUrl = textures.getSkin().getUrl();
+            String skinUrl = gson.fromJson(jsonTextures, JsonObject.class)
+                    .getAsJsonObject("textures").getAsJsonObject("SKIN")
+                    .get("url").getAsString();
 
             return apply(UUID.fromString(uuid), ImageIO.read(new URL(skinUrl)));
         } else {
-            return apply(UUID.fromString(uuid), ImageIO.read(new URL("https://github.com/danilppzz/Super-Join/w")));
+            // Retornar una imagen por defecto en caso de error
+            return apply(UUID.fromString(uuid), ImageIO.read(new URL("https://github.com/danilppzz/Super-Join/blob/main/resources/steve.png")));
         }
-    }
-}
-
-class ProfileResponse {
-    private String id;
-    private String name;
-    private Properties[] properties;
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Properties[] getProperties() {
-        return properties;
-    }
-}
-
-class Properties {
-    private String name;
-    private String value;
-
-    public String getName() {
-        return name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-}
-
-class Textures {
-    private Skin SKIN;
-
-    public Skin getSkin() {
-        return SKIN;
-    }
-}
-
-class Skin {
-    private String url;
-
-    public String getUrl() {
-        return url;
     }
 }

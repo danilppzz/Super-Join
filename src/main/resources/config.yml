@@ -1,0 +1,3 @@
+# If it's false it show a normal message.
+# But if it's True it shows the player head in chat.
+player_head_join_message: true
