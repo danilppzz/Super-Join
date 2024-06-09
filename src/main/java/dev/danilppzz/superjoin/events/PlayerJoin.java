@@ -13,11 +13,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class PlayerJoin implements Listener {
-    public static void main(String[] args) throws IOException {
-        System.out.println(imageToText(PlayerHead.get("b56377b5-3229-4b06-aed6-08b135634e7d")));
-    }
 
-    public static String imageToText(BufferedImage image) {
+    public static String imageToText(BufferedImage image, Player player) {
+        String playerName = player.getName();
         StringBuilder result = new StringBuilder();
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
@@ -30,8 +28,13 @@ public class PlayerJoin implements Listener {
                     String coloredSymbol = String.format(" #%02X%02X%02X⬛", red, green, blue);
                     result.append(HexColor.write(coloredSymbol));
                 } else {
-                    String coloredSymbol = String.format("#%02X%02X%02X⬛", red, green, blue);
-                    result.append(HexColor.write(coloredSymbol));
+                    if (x == 7 && y == 1) {
+                        String coloredSymbol = String.format("#%02X%02X%02X⬛   &fWelcome %s to the server!", red, green, blue, playerName);
+                        result.append(HexColor.write(coloredSymbol));
+                    } else {
+                        String coloredSymbol = String.format("#%02X%02X%02X⬛", red, green, blue);
+                        result.append(HexColor.write(coloredSymbol));
+                    }
                 }
             }
             result.append("\n");
@@ -47,7 +50,7 @@ public class PlayerJoin implements Listener {
 
         BufferedImage image = PlayerHead.get(player.getUniqueId().toString());
         event.getPlayer().sendMessage(HexColor.write("&f "));
-        event.getPlayer().sendMessage(imageToText(image));
+        event.getPlayer().sendMessage(imageToText(image, player));
         event.getPlayer().sendMessage(HexColor.write("&f "));
     }
 
