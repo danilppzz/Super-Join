@@ -1,0 +1,7 @@
+name: SuperJoin
+version: '${project.version}'
+main: dev.danilppzz.superjoin.SuperJoin
+api-version: '1.20'
+load: STARTUP
+authors: [danilppzz]
+description: This is a plugin that add a join message & events
