@@ -62,7 +62,7 @@ public class PlayerHead {
 
             return apply(UUID.fromString(uuid), ImageIO.read(new URL(skinUrl)));
         } else {
-            return apply(UUID.fromString(uuid), ImageIO.read(new URL("")));
+            return apply(UUID.fromString(uuid), ImageIO.read(new URL("https://github.com/danilppzz/Super-Join/")));
         }
     }
 }
