@@ -15,7 +15,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String string, String[] args) {
         if (args[0].equalsIgnoreCase("reload") && hasPermission(sender, "superjoin.reload")) {
             SuperJoin.getInstance().reloadConfig();
-            sender.sendMessage(HexColor.write("&8[#E99A10SUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.reload_command")));
+            sender.sendMessage(HexColor.write("&8[#5D9CD6SUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.reload_command")));
         }
         return false;
     }
@@ -24,7 +24,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         if (sender.hasPermission(permission)) {
             return true;
         } else {
-            sender.sendMessage(HexColor.write("&8[&cSUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.err_permission")));
+            sender.sendMessage(HexColor.write("&8[&cSUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.error_permission")));
             return false;
         }
     }

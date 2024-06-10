@@ -1,0 +1,20 @@
+{
+  "content": null,
+  "embeds": [
+    {
+      "title": "superjoin.net",
+      "description": "Welcome %player_name% to the server!",
+      "url": "https://superjoin.net",
+      "color": null,
+      "footer": {
+        "text": "join date"
+      },
+      "thumbnail": {
+        "url": "https://www.spigotmc.org/data/resource_icons/117/117221.jpg?1717965859"
+      }
+    }
+  ],
+  "username": "server",
+  "avatar_url": "https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico",
+  "attachments": []
+}

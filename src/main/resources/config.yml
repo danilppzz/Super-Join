@@ -22,8 +22,18 @@ join_message:
     - ""
     - ""
 
+discord_hook:
+  enabled: false
+  hook_url: ""
+  # We don't support the timestamp prop.
+  # Discord hook config file is inside /hook/discord.json
+  # You can create your own here: https://discohook.org/
+
+  # Here is the discord.ico:
+  # https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico
+
 # All the messages support chat color by &
 translation:
-  err_permission: "&fYou don't have enough permissions."
+  error_permission: "&fYou don't have enough permissions."
   reload_command: "&fThe plugin was reloaded."
   loading_config: "&fLoading configuration..."

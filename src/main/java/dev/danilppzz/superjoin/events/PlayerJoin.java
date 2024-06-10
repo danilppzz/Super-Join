@@ -91,6 +91,10 @@ public class PlayerJoin implements Listener {
         event.setJoinMessage(null);
         Player player = event.getPlayer();
 
+        if (SuperJoin.getInstance().getConfig().getBoolean("discord_hook.enabled")) {
+            DiscordHook.join(player);
+        }
+
         if (SuperJoin.getInstance().getConfig().getBoolean("join_message.player_head_join_message")) {
             BufferedImage image = PlayerHead.get(player.getUniqueId().toString());
             if (SuperJoin.getInstance().getConfig().getBoolean("join_message.use_margin")) {
@@ -110,11 +114,5 @@ public class PlayerJoin implements Listener {
                 event.getPlayer().sendMessage(PlaceholderAPI.setPlaceholders(player, HexColor.write("&f "+message)));
             }
         }
-    }
-
-    @EventHandler
-    public void onSendMessage(AsyncPlayerChatEvent event) throws IOException {
-        event.setCancelled(true);
-        event.getPlayer().sendMessage(HexColor.write(event.getMessage()));
     }
 }
