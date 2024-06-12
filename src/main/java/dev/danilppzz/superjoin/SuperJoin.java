@@ -1,5 +1,6 @@
 package dev.danilppzz.superjoin;
 
+import dev.danilppzz.superjoin.common.DiscordHookConfig;
 import dev.danilppzz.superjoin.common.HexColor;
 import dev.danilppzz.superjoin.common.UpdateChecker;
 import dev.danilppzz.superjoin.events.PlayerJoin;
@@ -11,6 +12,8 @@ public final class SuperJoin extends JavaPlugin implements Listener {
 
     private static SuperJoin instance;
 
+    public static Boolean useBetaFeatures() { return true; }
+
     public static SuperJoin getInstance()
     {
         return instance;
@@ -21,6 +24,7 @@ public final class SuperJoin extends JavaPlugin implements Listener {
     {
         instance = this;
         saveDefaultConfig();
+        DiscordHookConfig.register();
 
         // Dependencies Update
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {

@@ -2,6 +2,7 @@ package dev.danilppzz.superjoin.common.player;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import dev.danilppzz.superjoin.SuperJoin;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -36,7 +37,27 @@ public class PlayerHead {
         return head;
     }
 
-    public static BufferedImage get(String uuid) throws IOException {
+    private static BufferedImage applyHeadIcon(UUID uuid, BufferedImage in) {
+        BufferedImage head;
+
+        BufferedImage layer1 = in.getSubimage(8, 8, 8, 8);
+        BufferedImage layer2 = in.getSubimage(40, 8, 8, 8);
+
+        try {
+            head = new BufferedImage(48,  48, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g = head.createGraphics();
+            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+            g.drawImage(layer1, 4, 4, 40, 40, null);
+            g.drawImage(layer2, 0, 0, 48, 48, null);
+        } catch (Throwable t) { // There might be problems with headless servers when loading the graphics class, so we catch every exception and error on purpose here
+            head = new BufferedImage(8, 8, in.getType());
+            layer1.copyData(head.getRaster());
+        }
+
+        return head;
+    }
+
+    public static BufferedImage get(String uuid, Boolean headIcon) throws IOException {
         String profileUrl = "https://sessionserver.mojang.com/session/minecraft/profile/" + uuid;
         HttpURLConnection connection = (HttpURLConnection) new URL(profileUrl).openConnection();
         connection.setRequestMethod("GET");
@@ -52,7 +73,6 @@ public class PlayerHead {
             reader.close();
 
             Gson gson = new Gson();
-            // Parsear directamente el JSON sin necesidad de las clases eliminadas
             String base64Textures = gson.fromJson(response.toString(), JsonObject.class)
                     .getAsJsonArray("properties").get(0)
                     .getAsJsonObject().get("value").getAsString();
@@ -62,9 +82,12 @@ public class PlayerHead {
                     .getAsJsonObject("textures").getAsJsonObject("SKIN")
                     .get("url").getAsString();
 
-            return apply(UUID.fromString(uuid), ImageIO.read(new URL(skinUrl)));
+            if (headIcon) {
+                return applyHeadIcon(UUID.fromString(uuid), ImageIO.read(new URL(skinUrl)));
+            } else {
+                return apply(UUID.fromString(uuid), ImageIO.read(new URL(skinUrl)));
+            }
         } else {
-            // Retornar una imagen por defecto en caso de error
             return apply(UUID.fromString(uuid), ImageIO.read(new URL("https://github.com/danilppzz/Super-Join/blob/main/resources/steve.png")));
         }
     }

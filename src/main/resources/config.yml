@@ -22,10 +22,12 @@ join_message:
     - ""
     - ""
 
-discord_hook:
+hooks:
   enabled: false
-  hook_url: ""
-  # We don't support the timestamp prop.
+  discord_hook_url: ""
+  thumbnail_player_head: true
+  # We don't support the timestamp prop from discord web hook.
+  # We support PlaceholderAPI in values like %player_name%
   # Discord hook config file is inside /hook/discord.json
   # You can create your own here: https://discohook.org/
 

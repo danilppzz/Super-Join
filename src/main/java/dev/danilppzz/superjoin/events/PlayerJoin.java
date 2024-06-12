@@ -91,12 +91,12 @@ public class PlayerJoin implements Listener {
         event.setJoinMessage(null);
         Player player = event.getPlayer();
 
-        if (SuperJoin.getInstance().getConfig().getBoolean("discord_hook.enabled")) {
+        if (SuperJoin.getInstance().getConfig().getBoolean("hooks.enabled")) {
             DiscordHook.join(player);
         }
 
         if (SuperJoin.getInstance().getConfig().getBoolean("join_message.player_head_join_message")) {
-            BufferedImage image = PlayerHead.get(player.getUniqueId().toString());
+            BufferedImage image = PlayerHead.get(player.getUniqueId().toString(), false);
             if (SuperJoin.getInstance().getConfig().getBoolean("join_message.use_margin")) {
                 event.getPlayer().sendMessage(HexColor.write("&f "));
                 event.getPlayer().sendMessage(PlaceholderAPI.setPlaceholders(player, imageToText(image)));

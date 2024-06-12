@@ -1,5 +1,6 @@
 package dev.danilppzz.superjoin;
 
+import dev.danilppzz.superjoin.common.DiscordHookConfig;
 import dev.danilppzz.superjoin.common.HexColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -15,6 +16,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String string, String[] args) {
         if (args[0].equalsIgnoreCase("reload") && hasPermission(sender, "superjoin.reload")) {
             SuperJoin.getInstance().reloadConfig();
+            DiscordHookConfig.reload();
             sender.sendMessage(HexColor.write("&8[#5D9CD6SUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.reload_command")));
         }
         return false;
