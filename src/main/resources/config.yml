@@ -6,6 +6,7 @@ join_message:
 
   # useMargin is a style for the message making a margin top & bottom of the message.
   use_margin: true
+  use_sound: true
 
   # If it's false it show a normal message.
   # But if it's True it shows the player head in chat.
@@ -37,5 +38,3 @@ hooks:
 # All the messages support chat color by &
 translation:
   error_permission: "&fYou don't have enough permissions."
-  reload_command: "&fThe plugin was reloaded."
-  loading_config: "&fLoading configuration..."

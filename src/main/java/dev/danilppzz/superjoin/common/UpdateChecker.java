@@ -25,7 +25,7 @@ public class UpdateChecker {
 
             if (latestVersionNumbers > pluginVersion) {
                 SuperJoin.getInstance().getLogger().severe("There is a new version available: "+latestVersion);
-                SuperJoin.getInstance().getLogger().severe("You can download it at: https://www.spigotmc.org/resources/superjoin.117221/");
+                SuperJoin.getInstance().getLogger().severe("You can download it at: https://www.spigotmc.org/resources/%E2%AD%90superjoin%E2%AD%90-the-best-free-join-plugin.117221/");
             }
         } catch (Exception var3) {
             Bukkit.getConsoleSender().sendMessage(SuperJoin.getInstance().getName() + ChatColor.RED + " Error while checking update.");

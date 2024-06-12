@@ -20,12 +20,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         if (args[0].equalsIgnoreCase("reload") && hasPermission(sender, "superjoin.reload")) {
             SuperJoin.getInstance().reloadConfig();
             DiscordHookConfig.reload();
-            sender.sendMessage(HexColor.write("&8[#5D9CD6SUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.reload_command")));
-        } else if (args[0].equalsIgnoreCase("webhook") && hasPermission(sender, "superjoin.webhook")) {
-            if (args[1].equalsIgnoreCase("test")) {
-                DiscordHook.join((Player) sender);
-            }
-            sender.sendMessage(HexColor.write("&8[#5D9CD6SUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.reload_command")));
+            sender.sendMessage(HexColor.write("&8[#FFB600⭐&8] &fThe plugin was reloaded."));
         }
         return false;
     }
@@ -34,7 +29,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         if (sender.hasPermission(permission)) {
             return true;
         } else {
-            sender.sendMessage(HexColor.write("&8[&cSUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.error_permission")));
+            sender.sendMessage(HexColor.write("&8[&c❌&8] "+SuperJoin.getInstance().getConfig().getString("translation.error_permission")));
             return false;
         }
     }

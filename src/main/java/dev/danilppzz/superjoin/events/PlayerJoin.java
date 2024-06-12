@@ -4,6 +4,7 @@ import dev.danilppzz.superjoin.SuperJoin;
 import dev.danilppzz.superjoin.common.HexColor;
 import dev.danilppzz.superjoin.common.player.PlayerHead;
 import me.clip.placeholderapi.PlaceholderAPI;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -93,6 +94,10 @@ public class PlayerJoin implements Listener {
 
         if (SuperJoin.getInstance().getConfig().getBoolean("hooks.enabled")) {
             DiscordHook.join(player);
+        }
+
+        if (SuperJoin.getInstance().getConfig().getBoolean("join_message.use_sound")) {
+            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
         }
 
         if (SuperJoin.getInstance().getConfig().getBoolean("join_message.player_head_join_message")) {
