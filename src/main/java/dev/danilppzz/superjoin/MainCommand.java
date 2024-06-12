@@ -2,10 +2,13 @@ package dev.danilppzz.superjoin;
 
 import dev.danilppzz.superjoin.common.DiscordHookConfig;
 import dev.danilppzz.superjoin.common.HexColor;
+import dev.danilppzz.superjoin.events.DiscordHook;
+import dev.danilppzz.superjoin.events.PlayerJoin;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -17,6 +20,11 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         if (args[0].equalsIgnoreCase("reload") && hasPermission(sender, "superjoin.reload")) {
             SuperJoin.getInstance().reloadConfig();
             DiscordHookConfig.reload();
+            sender.sendMessage(HexColor.write("&8[#5D9CD6SUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.reload_command")));
+        } else if (args[0].equalsIgnoreCase("webhook") && hasPermission(sender, "superjoin.webhook")) {
+            if (args[1].equalsIgnoreCase("test")) {
+                DiscordHook.join((Player) sender);
+            }
             sender.sendMessage(HexColor.write("&8[#5D9CD6SUPERJOIN&8] "+SuperJoin.getInstance().getConfig().getString("translation.reload_command")));
         }
         return false;
