@@ -6,9 +6,9 @@ import dev.danilppzz.superjoin.common.player.PlayerHead;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.awt.*;
@@ -100,6 +100,10 @@ public class PlayerJoin implements Listener {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
         }
 
+        if (SuperJoin.getInstance().getConfig().getBoolean("hooks.default_enabled")) {
+            WebHook.send(event.getPlayer(), event);
+        }
+
         if (SuperJoin.getInstance().getConfig().getBoolean("join_message.player_head_join_message")) {
             BufferedImage image = PlayerHead.get(player.getUniqueId().toString(), false);
             if (SuperJoin.getInstance().getConfig().getBoolean("join_message.use_margin")) {
@@ -113,10 +117,10 @@ public class PlayerJoin implements Listener {
             String message = SuperJoin.getInstance().getConfig().getString("join_message.default_message");
             if (SuperJoin.getInstance().getConfig().getBoolean("join_message.use_margin")) {
                 event.getPlayer().sendMessage(HexColor.write("&f "));
-                event.getPlayer().sendMessage(PlaceholderAPI.setPlaceholders(player, HexColor.write("&f "+message)));
+                event.getPlayer().sendMessage(PlaceholderAPI.setPlaceholders(player, HexColor.write("&f " + message)));
                 event.getPlayer().sendMessage(HexColor.write("&f "));
             } else {
-                event.getPlayer().sendMessage(PlaceholderAPI.setPlaceholders(player, HexColor.write("&f "+message)));
+                event.getPlayer().sendMessage(PlaceholderAPI.setPlaceholders(player, HexColor.write("&f " + message)));
             }
         }
     }

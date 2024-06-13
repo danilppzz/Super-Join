@@ -1,8 +1,8 @@
 package dev.danilppzz.superjoin;
 
-import dev.danilppzz.superjoin.common.DiscordHookConfig;
-import dev.danilppzz.superjoin.common.HexColor;
+import dev.danilppzz.superjoin.configuration.DiscordHookConfig;
 import dev.danilppzz.superjoin.common.UpdateChecker;
+import dev.danilppzz.superjoin.configuration.TranslationConfig;
 import dev.danilppzz.superjoin.events.PlayerJoin;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -12,19 +12,20 @@ public final class SuperJoin extends JavaPlugin implements Listener {
 
     private static SuperJoin instance;
 
-    public static Boolean useBetaFeatures() { return true; }
+    public static Boolean useBetaFeatures() {
+        return getInstance().getConfig().getBoolean("useBetaFeatures");
+    }
 
-    public static SuperJoin getInstance()
-    {
+    public static SuperJoin getInstance() {
         return instance;
     }
 
     @Override
-    public void onEnable()
-    {
+    public void onEnable() {
         instance = this;
         saveDefaultConfig();
         DiscordHookConfig.register();
+        TranslationConfig.register();
 
         // Dependencies Update
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
@@ -39,14 +40,15 @@ public final class SuperJoin extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         getCommand("superjoin").setExecutor(new MainCommand());
-
-        Bukkit.getConsoleSender().sendMessage(HexColor.write("&8[&2SUPERJOIN&8] "+getConfig().getString("translation.loading_config")));
     }
 
     @Override
-    public void onDisable()
-    {
+    public void onDisable() {
         this.reloadConfig();
         this.saveConfig();
+        DiscordHookConfig.reload();
+        DiscordHookConfig.save();
+        TranslationConfig.reload();
+        TranslationConfig.save();
     }
 }

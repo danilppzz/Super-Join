@@ -1,4 +1,4 @@
-package dev.danilppzz.superjoin.common;
+package dev.danilppzz.superjoin.configuration;
 
 import dev.danilppzz.superjoin.SuperJoin;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,9 +11,8 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-// groups.yml config file.
-
-public class DiscordHookConfig {
+public class TranslationConfig {
+    private static final String ROOT = "lang/"+SuperJoin.getInstance().getConfig().getString("lang")+".yml";
     private static FileConfiguration list = null;
     private static File listFile = null;
 
@@ -23,24 +22,24 @@ public class DiscordHookConfig {
     }
 
     public static void reload() {
-        if (list == null) listFile = new File(SuperJoin.getInstance().getDataFolder(), "hook/discord.json");
+        if (list == null) listFile = new File(SuperJoin.getInstance().getDataFolder(), ROOT);
 
         list = YamlConfiguration.loadConfiguration(listFile);
-        Reader defConfigStream = new InputStreamReader(Objects.requireNonNull(SuperJoin.getInstance().getResource("hook/discord.json")), StandardCharsets.UTF_8);
+        Reader defConfigStream = new InputStreamReader(Objects.requireNonNull(SuperJoin.getInstance().getResource(ROOT)), StandardCharsets.UTF_8);
         list.setDefaults(YamlConfiguration.loadConfiguration(defConfigStream));
     }
 
     public static void save() {
         try {
             list.save(listFile);
-        } catch (IOException var2) {
-            var2.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
 
     }
 
     public static void register() {
-        listFile = new File(SuperJoin.getInstance().getDataFolder(), "hook/discord.json");
+        listFile = new File(SuperJoin.getInstance().getDataFolder(), ROOT);
 
         if (!listFile.exists()) {
             get().options().copyDefaults(true);

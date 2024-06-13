@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 @SuppressWarnings("deprecation")
 public class HexColor {
     private static final Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-    public static String write(String message)
-    {
+
+    public static String write(String message) {
         Matcher matcher = pattern.matcher(message);
 
         while (matcher.find()) {

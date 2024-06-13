@@ -2,7 +2,6 @@ package dev.danilppzz.superjoin.common.player;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import dev.danilppzz.superjoin.SuperJoin;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -11,8 +10,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.util.Base64;
 import java.net.URL;
+import java.util.Base64;
 import java.util.UUID;
 
 public class PlayerHead {
@@ -24,12 +23,13 @@ public class PlayerHead {
         BufferedImage layer2 = in.getSubimage(40, 8, 8, 8);
 
         try {
-            head = new BufferedImage(8,  8, BufferedImage.TYPE_INT_ARGB);
+            head = new BufferedImage(8, 8, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = head.createGraphics();
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
             g.drawImage(layer1, 0, 0, 8, 8, null);
             g.drawImage(layer2, 0, 0, 8, 8, null);
-        } catch (Throwable t) { // There might be problems with headless servers when loading the graphics class, so we catch every exception and error on purpose here
+        } catch (
+                Throwable t) { // There might be problems with headless servers when loading the graphics class, so we catch every exception and error on purpose here
             head = new BufferedImage(8, 8, in.getType());
             layer1.copyData(head.getRaster());
         }
@@ -44,12 +44,13 @@ public class PlayerHead {
         BufferedImage layer2 = in.getSubimage(40, 8, 8, 8);
 
         try {
-            head = new BufferedImage(48,  48, BufferedImage.TYPE_INT_ARGB);
+            head = new BufferedImage(48, 48, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = head.createGraphics();
             g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
             g.drawImage(layer1, 4, 4, 40, 40, null);
             g.drawImage(layer2, 0, 0, 48, 48, null);
-        } catch (Throwable t) { // There might be problems with headless servers when loading the graphics class, so we catch every exception and error on purpose here
+        } catch (
+                Throwable t) { // There might be problems with headless servers when loading the graphics class, so we catch every exception and error on purpose here
             head = new BufferedImage(8, 8, in.getType());
             layer1.copyData(head.getRaster());
         }

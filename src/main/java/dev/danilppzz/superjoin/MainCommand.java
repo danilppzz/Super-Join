@@ -1,14 +1,12 @@
 package dev.danilppzz.superjoin;
 
-import dev.danilppzz.superjoin.common.DiscordHookConfig;
+import dev.danilppzz.superjoin.configuration.DiscordHookConfig;
 import dev.danilppzz.superjoin.common.HexColor;
-import dev.danilppzz.superjoin.events.DiscordHook;
-import dev.danilppzz.superjoin.events.PlayerJoin;
+import dev.danilppzz.superjoin.configuration.TranslationConfig;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         if (args[0].equalsIgnoreCase("reload") && hasPermission(sender, "superjoin.reload")) {
             SuperJoin.getInstance().reloadConfig();
             DiscordHookConfig.reload();
+            TranslationConfig.reload();
             sender.sendMessage(HexColor.write("&8[#FFB600⭐&8] &fThe plugin was reloaded."));
         }
         return false;
@@ -29,7 +28,7 @@ public class MainCommand implements CommandExecutor, TabCompleter {
         if (sender.hasPermission(permission)) {
             return true;
         } else {
-            sender.sendMessage(HexColor.write("&8[&c❌&8] "+SuperJoin.getInstance().getConfig().getString("translation.error_permission")));
+            sender.sendMessage(HexColor.write("&8[&c❌&8] " + TranslationConfig.get().getString("error_permission")));
             return false;
         }
     }

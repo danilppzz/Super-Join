@@ -5,7 +5,6 @@ import dev.danilppzz.superjoin.common.ImageUtils;
 import dev.danilppzz.superjoin.common.player.PlayerHead;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -18,6 +17,7 @@ import java.net.URL;
 public class DiscordHook {
 
     private static final String WEBHOOK_URL = SuperJoin.getInstance().getConfig().getString("hooks.discord_hook_url");
+
     public static void join(Player player) {
         try {
             File jsonFile = new File(SuperJoin.getInstance().getDataFolder(), "hook/discord.json");

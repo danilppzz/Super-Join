@@ -9,6 +9,7 @@ public interface PlayerHeadInterface extends BiFunction<UUID, BufferedImage, Buf
 
     /**
      * Takes a players UUID and skin-image and creates an icon
+     *
      * @param playerUuid the players UUID
      * @param playerSkin the input image
      * @return a <b>new</b> {@link BufferedImage} generated based on the input image

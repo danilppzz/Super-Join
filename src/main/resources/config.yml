@@ -1,4 +1,6 @@
 updateChecker: false
+useBetaFeatures: false
+lang: "en_us"
 
 join_message:
   # Set the default message without player head.
@@ -24,9 +26,20 @@ join_message:
     - ""
 
 hooks:
+  # This is the discord webhook,
+  # Config allocated at /hook/discord.json
+  # You should replace this file with the code you want to send to the webhook.
   enabled: false
   discord_hook_url: ""
-  thumbnail_player_head: true
+
+  # This is a custom webhook,
+  # that send the whole event in json to an endpoint / webhook
+  default_enabled: false
+  default_web_hook: ""
+
+  # thumbnail_player_head is disabled temporary !!!
+  thumbnail_player_head: false
+
   # We don't support the timestamp prop from discord web hook.
   # We support PlaceholderAPI in values like %player_name%
   # Discord hook config file is inside /hook/discord.json
@@ -34,7 +47,3 @@ hooks:
 
   # Here is the discord.ico:
   # https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/6266bc493fb42d4e27bb8393_847541504914fd33810e70a0ea73177e.ico
-
-# All the messages support chat color by &
-translation:
-  error_permission: "&fYou don't have enough permissions."
