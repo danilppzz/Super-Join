@@ -22,9 +22,10 @@ This plugin has a lot of features.
 - Join Message without Player Head.
 - Join Message Customizar with full lines.
 - Join Sound for Player.
-- Translation.
+- Translation File.
 - PlaceholderAPI Support for ALL.
 - Discord Hook Integration with PlaceholderAPI to.
+- WebHook Integration / EndPoint Avaliable.
 
 ---
 
